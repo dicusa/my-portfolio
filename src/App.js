@@ -1,22 +1,25 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-dom';
 import Home from './pages/Home';
 import Contact from './pages/Contact';
+import './App.css'; // Import the CSS file
 
 const App = () => {
   return (
-    <Router basename="/my-portfolio">
-      <div>
-        <nav>
-          <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/contact">Contact</Link></li>
+    <Router basename="/">
+      <div className="App">
+        <nav className="navbar">
+          <ul className="navbar-list">
+            <li><NavLink exact to="/" className="nav-link" activeClassName="active-link">Home</NavLink></li>
+            <li><NavLink to="/contact" className="nav-link" activeClassName="active-link">Contact</NavLink></li>
           </ul>
         </nav>
-        <Routes>
-          <Route path="/" element={<Home/>} />
-          <Route path="/contact" element={<Contact/>} />
-        </Routes>
+        <div className="content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </div>
       </div>
     </Router>
   );
