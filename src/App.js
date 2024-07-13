@@ -5,7 +5,7 @@ import Contact from './pages/Contact';
 
 const App = () => {
   return (
-    <Router>
+    <Router basename="/my-portfolio">
       <div>
         <nav>
           <ul>
