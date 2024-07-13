@@ -1,20 +1,25 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import NavBar from './components/NavBar';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import Contact from './pages/Contact';
-import './App.css';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <NavBar />
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/contact" component={Contact} />
-      </Switch>
-    </div>
+    <Router>
+      <div>
+        <nav>
+          <ul>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/contact">Contact</Link></li>
+          </ul>
+        </nav>
+        <Routes>
+          <Route path="/" element={<Home/>} />
+          <Route path="/contact" element={<Contact/>} />
+        </Routes>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
