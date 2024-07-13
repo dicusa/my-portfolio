@@ -14,7 +14,7 @@ code {
 }
 
 .navbar {
-  background-color: #24292E; /* Dark background color as in the image */
+  background-color: #24292E; 
   overflow: hidden;
 }
 
@@ -24,6 +24,7 @@ code {
   padding: 0;
   display: flex;
   justify-content: center;
+  position: relative; /* Needed for positioning the active line */
 }
 
 .navbar-list li {
@@ -38,6 +39,7 @@ code {
   display: block;
   padding: 10px;
   position: relative; /* Needed for the active link indicator */
+  transition: color 0.3s; /* Smooth transition for text color */
 }
 
 .nav-link:hover {
@@ -46,14 +48,30 @@ code {
   border-radius: 5px;
 }
 
-.active-link::after {
-  content: '';
+.navbar-list::after {
+  content: "";
   position: absolute;
+  bottom: 0;
   left: 0;
-  bottom: -10px;
-  width: 100%;
   height: 2px;
+  width: 100%;
+  background-color: transparent;
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar-list .active-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
   background-color: orange;
+  transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
+}
+
+.navbar-list .active-link {
+  color: white; /* Ensure the text color changes when active */
 }
 
 .content {
