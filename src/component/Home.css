@@ -1,50 +1,68 @@
 /* Post Card Styling */
 .post-card {
-    width: 250px;
-    border: 1px medium #e1e4e8;
+    width: 20vmax;
+    /* border: 1px solid #e1e4e8; */
     border-radius: 8px;
-    overflow: hidden;
     margin: 10px;
     padding: 16px;
-    
-  }
-  
-  .post-card img {
-    width: 100%;
-    height: 100%;
-    border-bottom: 1px solid #e1e4e8;
-    padding-bottom: 16px;
-  }
-  
-  .post-card h3 {
-    font-size: 1.25rem;
-    margin: 16px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box; /* Add box-sizing to include padding in height */
+    transition: transform 0.3s ease;
+    position: relative;
+    background: white;
+    box-sizing: border-box;
+}
+
+.post-card:hover {
+    transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+.post-card img {
+    width: 20vmax;
+    height: 10vmax; /* Set a fixed height for the image */
+    object-fit: contain; /* Cover the image area without distortion */
+    align-self: center;
+}
+
+.post-card h3 {
+    border-top: 1px solid #e1e4e8;
+    padding-top: 16px;
+    font-size: 1vmax;
+    margin: 16px 0 0 0;
     overflow: hidden;
     text-overflow: ellipsis;
-  }
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Number of lines to show */
+    -webkit-box-orient: vertical;
+    line-height: 1.5em; /* Adjust as necessary */
+    max-height: 3em; /* 2 lines * line-height */
+    height: 3em; /* Ensure title space is consistent */
+}
 
-  .scroll-container {
+.scroll-container {
     display: flex;
     overflow-x: auto;
-    gap: 10px;
-  }
-  
-  .post-card a {
+    /* gap: 10px; */
+    /* padding: 5px; */
+    padding-bottom: 16px;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none; 
+}
+
+.post-card a {
     color: #007bff;
-    text-decoration: dotted;
+    text-decoration: none;
     font-weight: bold;
-    margin-top: auto;
-    border-width: 10mm solid aquamarine;
+    display: flex;
     flex-direction: column;
-    display: block;
-    justify-content: space-around;
-  }
-  
-  
-  /* Load More Button */
-  .load-more-button {
+    justify-content: space-between; /* Ensure proper spacing in the link */
+    height: 100%; /* Ensure link height covers the card */
+}
+
+.load-more-button {
     display: inline-block;
-    margin-top: 16px;
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -54,12 +72,24 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    align-self: center;
     cursor: pointer;
     font-size: 1.5rem;
-    transition: background-color 0.3s ease;
-  }
-  
-  .load-more-button:hover {
-    background-color: #0056b3;
-  }
-  
+    transition: all 0.3s ease;
+    padding: 1cm;
+}
+
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .post-card {
+        width: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .post-card {
+        width: 150px;
+    }
+}
