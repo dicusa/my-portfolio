@@ -1,7 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import { fetchMediumPosts, fetchGitHubRepos } from "../services/api";
 import "../component/Home.css";
-import { marked } from "marked";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import Modal from "../component/Modal"; // Import the modal component
+import ReactMarkdown from "react-markdown"; // Import react-markdown
 
 const Home = () => {
   const [mediumPosts, setMediumPosts] = useState([]);
@@ -9,6 +12,7 @@ const Home = () => {
   const [githubRepos, setGitHubRepos] = useState([]);
   const [repoPage, setRepoPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedRepoReadme, setSelectedRepoReadme] = useState(null); // State for selected repo README
   const mediumContainerRef = useRef(null);
   const githubContainerRef = useRef(null);
 
@@ -23,13 +27,7 @@ const Home = () => {
     const loadGitHubRepos = async () => {
       setIsLoading(true);
       const repos = await fetchGitHubRepos();
-      const reposWithReadme = await Promise.all(
-        repos.slice(repoPage * 5, (repoPage + 1) * 5).map(async (repo) => {
-          const readme = await fetchReadme(repo.owner.login, repo.name);
-          return { ...repo, readme };
-        })
-      );
-      setGitHubRepos(githubRepos.concat(reposWithReadme));
+      setGitHubRepos(githubRepos.concat(repos));
       setRepoPage(repoPage + 1);
       setIsLoading(false);
     };
@@ -67,26 +65,26 @@ const Home = () => {
       loadMoreFunc();
     }
   };
+
   const fetchReadme = async (owner, repo) => {
     const response = await fetch(
-      `https://raw.githubusercontent.com/${owner}/${repo}/main/README.md`
+      `https://raw.githubusercontent.com/${owner}/${repo}/master/README.md`
     );
     if (response.ok) {
       const text = await response.text();
-      return marked(text);
+      return text;
     }
     return null;
   };
-  // const getReadmeImage = (repo) => {
-  //   const imageUrl = `https://raw.githubusercontent.com/${repo.owner.login}/${repo.name}/main/README.md`;
-  //   return (
-  //     <img
-  //       src={imageUrl}
-  //       alt={repo.name}
-  //       onError={(e) => (e.target.src = "https://via.placeholder.com/150")}
-  //     />
-  //   );
-  // };
+
+  const handleRepoClick = async (repo) => {
+    const readme = await fetchReadme(repo.owner.login, repo.name);
+    setSelectedRepoReadme(readme); // Store raw markdown content
+  };
+
+  const closeModal = () => {
+    setSelectedRepoReadme(null); // Close the modal
+  };
 
   return (
     <div>
@@ -114,22 +112,26 @@ const Home = () => {
         onScroll={() => handleScroll(githubContainerRef, loadMoreGitHubRepos)}
       >
         {githubRepos.map((repo, index) => (
-          <div key={index} className="post-card">
-            <a href={repo.html_url} target="_blank" rel="noopener noreferrer">
-              {repo.readme ? (
-                <div
-                  className="readme-content"
-                  dangerouslySetInnerHTML={{ __html: repo.readme }}
-                />
-              ) : (
-                <img src="https://via.placeholder.com/150" alt={repo.name} />
-              )}
-              <h3>{repo.name}</h3>
-            </a>
+          <div
+            key={index}
+            className="post-card"
+            onClick={() => handleRepoClick(repo)}
+          >
+            <div className="icon-containers">
+              <FontAwesomeIcon icon={faGithub} size="3x" />
+            </div>
+            <h3>{repo.name}</h3>
           </div>
         ))}
       </div>
       {isLoading && <p>Loading more repositories...</p>}
+
+      {selectedRepoReadme && (
+        <Modal onClose={closeModal}>
+          <ReactMarkdown>{selectedRepoReadme}</ReactMarkdown>{" "}
+          {/* Render markdown content */}
+        </Modal>
+      )}
     </div>
   );
 };

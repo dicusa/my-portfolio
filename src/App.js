@@ -8,6 +8,7 @@ import {
 import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import "./App.css"; // Import the CSS file
+import MarkdownEditor from "./pages/MarkdownEditor";
 
 const App = () => {
   return (
@@ -29,12 +30,22 @@ const App = () => {
                 )}
               </NavLink>
             </li>
+            <li>
+              <NavLink to="/mdEditor" className="nav-link">
+                {({ isActive, isPending, isTransitioning }) => (
+                  <span className={isActive ? "active-link" : ""}>
+                    MDEditor
+                  </span>
+                )}
+              </NavLink>
+            </li>
           </ul>
         </nav>
         <div className="content">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/mdEditor" element={<MarkdownEditor />} />
           </Routes>
         </div>
       </div>
