@@ -1,137 +1,81 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { fetchMediumPosts, fetchGitHubRepos } from "../services/api";
-import "../component/Home.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import Modal from "../component/Modal"; // Import the modal component
-import ReactMarkdown from "react-markdown"; // Import react-markdown
+import "../component/Home.css";
 
 const Home = () => {
   const [mediumPosts, setMediumPosts] = useState([]);
-  const [mediumPage, setMediumPage] = useState(1);
   const [githubRepos, setGitHubRepos] = useState([]);
-  const [repoPage, setRepoPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
-  const [selectedRepoReadme, setSelectedRepoReadme] = useState(null); // State for selected repo README
-  const mediumContainerRef = useRef(null);
-  const githubContainerRef = useRef(null);
 
   useEffect(() => {
     const loadMediumPosts = async () => {
-      setIsLoading(true);
       const posts = await fetchMediumPosts();
-      setMediumPosts(posts.slice(0, 5));
-      setIsLoading(false);
+      setMediumPosts(posts.slice(0, 5)); // Fetch only the latest 5 posts
     };
 
     const loadGitHubRepos = async () => {
-      setIsLoading(true);
       const repos = await fetchGitHubRepos();
-      setGitHubRepos(githubRepos.concat(repos));
-      setRepoPage(repoPage + 1);
-      setIsLoading(false);
+      setGitHubRepos(repos.slice(0, 5)); // Fetch only the latest 5 repos
     };
 
     loadMediumPosts();
     loadGitHubRepos();
   }, []);
 
-  const loadMoreMediumPosts = async () => {
-    setIsLoading(true);
-    const posts = await fetchMediumPosts();
-    setMediumPosts(
-      mediumPosts.concat(posts.slice(mediumPage * 5, (mediumPage + 1) * 5))
-    );
-    setMediumPage(mediumPage + 1);
-    setIsLoading(false);
-  };
-
-  const loadMoreGitHubRepos = async () => {
-    setIsLoading(true);
-    const repos = await fetchGitHubRepos();
-    setGitHubRepos(
-      githubRepos.concat(repos.slice(repoPage * 5, (repoPage + 1) * 5))
-    );
-    setRepoPage(repoPage + 1);
-    setIsLoading(false);
-  };
-
-  const handleScroll = (ref, loadMoreFunc) => {
-    if (
-      ref.current.scrollWidth - ref.current.scrollLeft <=
-        ref.current.clientWidth + 100 &&
-      !isLoading
-    ) {
-      loadMoreFunc();
-    }
-  };
-
-  const fetchReadme = async (owner, repo) => {
-    const response = await fetch(
-      `https://raw.githubusercontent.com/${owner}/${repo}/master/README.md`
-    );
-    if (response.ok) {
-      const text = await response.text();
-      return text;
-    }
-    return null;
-  };
-
-  const handleRepoClick = async (repo) => {
-    const readme = await fetchReadme(repo.owner.login, repo.name);
-    setSelectedRepoReadme(readme); // Store raw markdown content
-  };
-
-  const closeModal = () => {
-    setSelectedRepoReadme(null); // Close the modal
-  };
-
   return (
-    <div>
-      <h2>Stories by Yash on Medium</h2>
-      <div
-        className="scroll-container"
-        ref={mediumContainerRef}
-        onScroll={() => handleScroll(mediumContainerRef, loadMoreMediumPosts)}
-      >
-        {mediumPosts.map((post, index) => (
-          <div key={index} className="post-card">
-            <a href={post.link} target="_blank" rel="noopener noreferrer">
-              <img src={post.thumbnail} alt={post.title} />
-              <h3>{post.title}</h3>
-            </a>
-          </div>
-        ))}
-      </div>
-      {isLoading && <p>Loading more posts...</p>}
+    <div className="home-container">
+      <header className="header">
+        <h1>Latest Medium Stories</h1>
+      </header>
 
-      <h2>GitHub Repositories</h2>
-      <div
-        className="scroll-container"
-        ref={githubContainerRef}
-        onScroll={() => handleScroll(githubContainerRef, loadMoreGitHubRepos)}
-      >
-        {githubRepos.map((repo, index) => (
-          <div
-            key={index}
-            className="post-card"
-            onClick={() => handleRepoClick(repo)}
-          >
-            <div className="icon-containers">
-              <FontAwesomeIcon icon={faGithub} size="3x" />
+      <section id="medium" className="section medium-posts">
+        <div className="post-list">
+          {mediumPosts.map((post, index) => (
+            <div key={index} className="post-card">
+              <a href={post.link} target="_blank" rel="noopener noreferrer">
+                <img
+                  src={post.thumbnail}
+                  alt={post.title}
+                  className="post-thumbnail"
+                />
+                <div className="post-content">
+                  <h3 className="post-title">{post.title}</h3>
+                  <p className="post-date">
+                    {new Date(post.pubDate).toLocaleDateString()}
+                  </p>
+                  <p className="post-excerpt">{post.description}</p>
+                </div>
+              </a>
             </div>
-            <h3>{repo.name}</h3>
-          </div>
-        ))}
-      </div>
-      {isLoading && <p>Loading more repositories...</p>}
+          ))}
+        </div>
+      </section>
 
-      {selectedRepoReadme && (
-        <Modal onClose={closeModal}>
-          <ReactMarkdown>{selectedRepoReadme}</ReactMarkdown>{" "}
-          {/* Render markdown content */}
-        </Modal>
-      )}
+      <section id="github" className="section github-repos">
+        <h2 className="section-title">GitHub Repositories</h2>
+        <div className="repo-list">
+          {githubRepos.map((repo, index) => (
+            <div key={index} className="repo-card">
+              <a href={repo.html_url} target="_blank" rel="noopener noreferrer">
+                <div className="repo-content">
+                  <FontAwesomeIcon
+                    icon={faGithub}
+                    size="3x"
+                    className="repo-icon"
+                  />
+                  <h3 className="repo-title">{repo.name}</h3>
+                  <p className="repo-description">{repo.description}</p>
+                </div>
+              </a>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <footer className="footer">
+        <p>© 2024 My Portfolio</p>
+      </footer>
     </div>
   );
 };

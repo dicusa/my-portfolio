@@ -11,10 +11,11 @@ code {
 
 .App {
   text-align: center;
+  background-color: #1e2024;
 }
 
 .navbar {
-  background-color: #24292E; 
+  background-color: #1e2024; 
   overflow: hidden;
 }
 
@@ -23,7 +24,7 @@ code {
   margin: 0;
   padding: 0;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   position: relative; /* Needed for positioning the active line */
 }
 
@@ -33,7 +34,7 @@ code {
 }
 
 .nav-link {
-  color: white;
+  color: #787878;
   text-align: center;
   text-decoration: none;
   display: block;
@@ -75,7 +76,7 @@ code {
 }
 
 .content {
-  padding: 20px;
+  /* padding: 20px; */
 }
 
 .home, .contact {
