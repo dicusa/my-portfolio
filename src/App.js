@@ -9,6 +9,8 @@ import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import "./App.css"; // Import the CSS file
 import MarkdownEditor from "./pages/MarkdownEditor";
+import Repo from "./pages/Repo";
+import Blog from "./pages/Blog";
 
 const App = () => {
   return (
@@ -20,6 +22,20 @@ const App = () => {
               <NavLink exact to="/" className="nav-link">
                 {({ isActive, isPending, isTransitioning }) => (
                   <span className={isActive ? "active-link" : ""}>Home</span>
+                )}
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/repo" className="nav-link">
+                {({ isActive, isPending, isTransitioning }) => (
+                  <span className={isActive ? "active-link" : ""}>Repos</span>
+                )}
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/blog" className="nav-link">
+                {({ isActive, isPending, isTransitioning }) => (
+                  <span className={isActive ? "active-link" : ""}>Blogs</span>
                 )}
               </NavLink>
             </li>
@@ -44,6 +60,8 @@ const App = () => {
         <div className="content">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/repo" element={<Repo />} />
+            <Route path="/blog" element={<Blog />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/mdEditor" element={<MarkdownEditor />} />
           </Routes>

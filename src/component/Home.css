@@ -31,11 +31,8 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-
-
 .section {
-    margin-bottom: 40px;
-
+    margin-bottom: 20px;
 }
 
 .section-title {
@@ -118,6 +115,40 @@ body {
 .repo-icon {
     margin-bottom: 15px;
     color: #ffffff;
+}
+
+.load-more {
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #1c1e22;
+    /* Button background color */
+    color: #ffffff;
+    /* Button text color */
+    border: 2px solid #007bff;
+    /* Border color */
+    border-radius: 25px;
+    /* Rounded corners */
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.load-more:hover {
+    background-color: #007bff;
+    /* Background color on hover */
+    color: #ffffff;
+    /* Text color on hover */
+    border-color: #0056b3;
+    /* Border color on hover */
+}
+
+.load-more:focus {
+    outline: none;
+    /* Remove default focus outline */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    /* Custom focus outline */
 }
 
 .footer {
