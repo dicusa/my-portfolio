@@ -10,12 +10,12 @@ code {
 }
 
 .App {
-  text-align: center;
+  /* text-align: center; */
   background-color: #1e2024;
 }
 
 .navbar {
-  background-color: #1e2024; 
+  background-color: #1e2024;
   overflow: hidden;
 }
 
@@ -25,12 +25,18 @@ code {
   padding: 0;
   display: flex;
   justify-content: flex-end;
-  position: relative; /* Needed for positioning the active line */
+  position: relative;
+  flex-wrap: nowrap;
+  /* Prevent wrapping */
+  overflow-x: auto;
+  /* Allow horizontal scrolling if needed */
 }
 
 .navbar-list li {
   display: inline;
   padding: 14px 20px;
+  white-space: nowrap;
+  /* Prevent text wrapping */
 }
 
 .nav-link {
@@ -39,8 +45,8 @@ code {
   text-decoration: none;
   display: block;
   padding: 10px;
-  position: relative; /* Needed for the active link indicator */
-  transition: color 0.3s; /* Smooth transition for text color */
+  position: relative;
+  transition: color 0.3s;
 }
 
 .nav-link:hover {
@@ -72,14 +78,15 @@ code {
 }
 
 .navbar-list .active-link {
-  color: white; /* Ensure the text color changes when active */
+  color: white;
 }
 
-.content {
-  /* padding: 20px; */
+/* .content {
+  padding: 20px;
 }
 
-.home, .contact {
+.home,
+.contact {
   padding: 20px;
 }
 
@@ -112,4 +119,57 @@ h1 {
 .post h3 {
   font-size: 1.2em;
   margin-top: 10px;
+} */
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  .navbar-list {
+    justify-content: flex-start;
+    /* Align items to the start on smaller screens */
+  }
+
+  .navbar-list li {
+    padding: 10px 15px;
+  }
+
+  /* .content {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 1.5em;
+  }
+
+  .medium-posts {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .post {
+    width: 90%;
+    max-width: 300px;
+  } */
+}
+
+@media screen and (max-width: 480px) {
+  .navbar {
+    overflow-x: auto;
+    /* Allow horizontal scrolling for very small screens */
+  }
+
+  .navbar-list li {
+    padding: 10px;
+  }
+
+  .nav-link {
+    padding: 10px;
+  }
+
+  /* .content {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 1.2em;
+  } */
 }

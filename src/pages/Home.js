@@ -1,106 +1,117 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faFacebookF,
-  faTwitter,
-  faLinkedinIn,
-  faGithub,
-} from "@fortawesome/free-brands-svg-icons";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import "../component/About.css";
-import "../asset/profilePic.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
+import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
+import profilePic from "../asset/profilePic.png"; // Update with the correct path to your profile picture
+
 const Home = () => {
   return (
-    <div className="about-container">
-      <section className="profile-section">
-        <div className="profile-photo">
-          <img
-            src="https://avatars.githubusercontent.com/u/57257390?s=400&u=56dae22cc239bf4bb07a7f492c3d371fe80e8cb7&v=4"
-            alt="Your Name"
-          />
-        </div>
-        <div className="profile-details">
-          <h1>Yash Jain</h1>
-          <p>Full Stack Developer</p>
-          <div className="social-icons">
-            <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FontAwesomeIcon icon={faFacebookF} />
-            </a>
-            <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FontAwesomeIcon icon={faTwitter} />
-            </a>
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FontAwesomeIcon icon={faLinkedinIn} />
-            </a>
-            <a
-              href="https://github.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FontAwesomeIcon icon={faGithub} />
-            </a>
-            <a
-              href="mailto:youremail@example.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FontAwesomeIcon icon={faEnvelope} />
-            </a>
+    <div className="about-me">
+      <header className="hero-section">
+        <div className="hero-content">
+          <img src={profilePic} alt="Yash Jain" className="profile-pic" />
+          <div className="hero-additon">
+            <h1>Yash Jain</h1>
+            <p>Aspiring Solution Architect | Developer Analyst</p>
+            <div className="hero-buttons">
+              <a
+                href="/my-portfolio/resume"
+                className="btn"
+              >
+                Resume
+              </a>
+              <a
+                href="/my-portfolio/contact"
+                className="btn"
+              >
+                Contact
+              </a>
+            </div>
           </div>
         </div>
-      </section>
+      </header>
 
-      <section className="about-section">
-        <h2>About Me</h2>
+      <section className="section what-i-do">
+        <h2>What I Do</h2>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-          varius enim in eros elementum tristique. Duis cursus, mi quis viverra
-          ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.
+          I specialize in developing scalable e-commerce applications and
+          architecting solutions for complex business problems. My expertise
+          includes system design, database management, and full-stack
+          development.
         </p>
       </section>
 
-      <section className="skills-section">
-        <h2>Skills</h2>
-        <ul>
-          <li>JavaScript</li>
-          <li>React</li>
-          <li>Node.js</li>
-          <li>Python</li>
-          <li>HTML & CSS</li>
-          {/* Add more skills as needed */}
-        </ul>
-      </section>
-
-      <section className="experience-section">
-        <h2>Experience</h2>
-        <div className="experience-item">
-          <h3>Job Title</h3>
-          <p>Company Name</p>
-          <p>Job Description and responsibilities</p>
+      <section class="testimonials-section">
+        <h2>Testimonials</h2>
+        <div class="testimonials-container">
+          <div class="testimonial">
+            <img
+              src="/api/placeholder/50/50"
+              alt="Melanie Tan"
+              class="testimonial-image"
+            />
+            <div class="testimonial-content">
+              <span class="quote-mark quote-left">"</span>
+              <p>
+                Yash is an extraordinary individual with extensive knowledge in
+                Backoffice. He supported the BD Biosciences website in
+                troubleshooting and resolving issues and he was heavily involved
+                in key projects and enhancements. Without a doubt, he’s
+                dependable and reliable and I would love to work with him again.
+              </p>
+              <span class="quote-mark quote-right">"</span>
+            </div>
+            <div class="testimonial-author">Melanie Tan</div>
+            <div class="testimonial-position">
+              Global Channel Manager, eProcurement at BD
+            </div>
+          </div>
+          <div class="testimonial">
+            <img
+              src="/api/placeholder/50/50"
+              alt="Imran Kabir"
+              class="testimonial-image"
+            />
+            <div class="testimonial-content">
+              <span class="quote-mark quote-left">"</span>
+              <p>
+                Yash is an asset that you don't want to lose. For a person who
+                is young and early into his career, he has shown exceptional
+                maturity in handling complex projects, navigating the team, and
+                dealing with very tough business folk by demonstrating great
+                skills by quickly grasping technical know-how on a SAP Hybris
+                Cloud Commerce v2 technology-based project. It's been an amazing
+                journey while it lasted, wish it would have lasted longer.
+              </p>
+              <span class="quote-mark quote-right">"</span>
+            </div>
+            <div class="testimonial-author">Imran Kabir</div>
+            <div class="testimonial-position">
+              Seasoned IT Project/Program Manager
+            </div>
+          </div>
         </div>
-        {/* Add more experiences as needed */}
       </section>
-
-      <section className="education-section">
-        <h2>Education</h2>
-        <div className="education-item">
-          <h3>Degree</h3>
-          <p>Institution Name</p>
-          <p>Description and achievements</p>
+      <section className="section contact-info">
+        <h2>Contact Information</h2>
+        <p>
+          <FontAwesomeIcon icon={faEnvelope} /> yash.jain@example.com
+        </p>
+        <p>
+          <FontAwesomeIcon icon={faPhone} /> +91-1234567890
+        </p>
+        <div className="social-links">
+          <a
+            href="https://www.linkedin.com/in/yash-jain-869144b1/"
+            className="social-link"
+          >
+            <FontAwesomeIcon icon={faLinkedin} />
+          </a>
+          <a href="https://github.com/dicusa" className="social-link">
+            <FontAwesomeIcon icon={faGithub} />
+          </a>
         </div>
-        {/* Add more education details as needed */}
       </section>
     </div>
   );

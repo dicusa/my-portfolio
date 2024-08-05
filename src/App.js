@@ -11,6 +11,7 @@ import "./App.css"; // Import the CSS file
 import MarkdownEditor from "./pages/MarkdownEditor";
 import Repo from "./pages/Repo";
 import Blog from "./pages/Blog";
+import Resume from "./pages/Resume";
 
 const App = () => {
   return (
@@ -22,6 +23,13 @@ const App = () => {
               <NavLink exact to="/" className="nav-link">
                 {({ isActive, isPending, isTransitioning }) => (
                   <span className={isActive ? "active-link" : ""}>Home</span>
+                )}
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/resume" className="nav-link">
+                {({ isActive, isPending, isTransitioning }) => (
+                  <span className={isActive ? "active-link" : ""}>Resume</span>
                 )}
               </NavLink>
             </li>
@@ -57,9 +65,10 @@ const App = () => {
             </li>
           </ul>
         </nav>
-        <div className="content">
+        <div className="">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/resume" element={<Resume />} />
             <Route path="/repo" element={<Repo />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/contact" element={<Contact />} />

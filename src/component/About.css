@@ -1,125 +1,276 @@
-/* General Styling */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #121212;
-    color: #ffffff;
+    font-family: 'Open Sans', sans-serif;
+    color: #fff;
+    background-color: #1a1a1a;
     margin: 0;
     padding: 0;
 }
 
-.about-container {
+.about-me {
     padding: 20px;
 }
 
-/* Profile Section */
-.profile-section {
+.hero-section {
+    text-align: center;
+    padding: 50px 0;
+    background: linear-gradient(135deg, #1a1a1a, #333);
+}
+
+.hero-content {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 50px 20px;
-    background-color: #1c1c1c;
-    border-bottom: 1px solid #333;
+    padding: 10px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.profile-photo img {
-    width: 150px;
-    height: 150px;
+.hero-addition {
+    display: grid;
+    text-align: left;
+}
+
+.profile-pic {
+    width: 200px;
+    height: 200px;
+    border: 5px solid #333;
     border-radius: 50%;
     margin-bottom: 20px;
 }
 
-.profile-details h1 {
-    font-size: 32px;
-    margin: 0;
+.hero-content h1 {
+    font-size: 2.5em;
+    margin: 0 0 10px;
+    color: #d4e2e5;
 }
 
-.profile-details p {
-    font-size: 18px;
-    color: #aaaaaa;
-    margin: 10px 0;
+.hero-content p {
+    font-size: 1.1em;
+    margin-bottom: 20px;
 }
 
-.social-icons {
+.hero-buttons .btn {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    border: 2px solid #00c9ff;
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.3s;
+    border-radius: 25px;
+    font-weight: bold;
+}
+
+.hero-buttons .btn:hover {
+    background-color: #fff;
+    color: #1a1a1a;
+}
+
+.section {
+    padding: 40px 20px;
+    text-align: center;
+    background-color: #2a2a2a;
+    margin-bottom: 20px;
+}
+
+.section h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #00c9ff;
+}
+
+.section p {
+    font-size: 1em;
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+.testimonials-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    position: relative;
+    display: inline-block;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 50%;
+    height: 3px;
+    background-color: #3498db;
+}
+
+.testimonials-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.testimonial {
+    flex: 1 1 100%;
+    max-width: 500px;
+    background-color: #2c2c2c;
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.testimonial-content {
+    margin-left: 60px;
+    font-style: italic;
+    line-height: 1.6;
+}
+
+.testimonial-author {
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.testimonial-position {
+    font-size: 0.9em;
+    color: #888;
+}
+
+.testimonial-image {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.quote-mark {
+    font-size: 60px;
+    position: absolute;
+    opacity: 0.1;
+}
+
+.quote-left {
+    top: 10px;
+    left: 70px;
+}
+
+.quote-right {
+    bottom: 10px;
+    right: 20px;
+}
+
+.testimonial-nav {
+    display: flex;
+    justify-content: center;
     margin-top: 20px;
 }
 
-.social-icons a {
-    color: #ffffff;
+.nav-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #444;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.nav-dot.active {
+    background-color: #3498db;
+}
+
+.contact-info p {
+    font-size: 1em;
+    margin: 10px 0;
+}
+
+.contact-info p svg {
+    margin-right: 10px;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.social-link {
     margin: 0 10px;
-    font-size: 20px;
-    transition: color 0.3s ease;
+    font-size: 1.5em;
+    color: #00c9ff;
+    transition: all 0.3s;
 }
 
-.social-icons a:hover {
-    color: #007bff;
+.social-link:hover {
+    color: #0073b1;
 }
 
-/* About Section */
-.about-section,
-.skills-section,
-.experience-section,
-.education-section {
-    padding: 50px 20px;
+@media (min-width: 768px) {
+    .hero-content {
+        flex-direction: row;
+        justify-content: center;
+        text-align: left;
+    }
+
+    .profile-pic {
+        width: 300px;
+        height: 300px;
+        margin-right: 50px;
+        margin-bottom: 0;
+    }
+
+    .hero-addition {
+        flex: 1;
+    }
+
+    .testimonial {
+        flex: 0 0 calc(50% - 20px);
+    }
 }
 
-.about-section h2,
-.skills-section h2,
-.experience-section h2,
-.education-section h2 {
-    font-size: 28px;
-    border-bottom: 2px solid #007bff;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
+@media (max-width: 767px) {
+    .hero-content {
+        text-align: center;
+    }
+
+    .testimonial-content {
+        margin-left: 0;
+        margin-top: 60px;
+    }
+
+    .quote-left {
+        top: 70px;
+        left: 10px;
+    }
 }
 
-.about-section p,
-.skills-section ul,
-.experience-section .experience-item,
-.education-section .education-item {
-    font-size: 16px;
-    color: #cccccc;
-}
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 2em;
+    }
 
-.skills-section ul {
-    list-style: none;
-    padding: 0;
-}
+    .hero-content p {
+        font-size: 1em;
+    }
 
-.skills-section ul li {
-    background-color: #1e1e1e;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    transition: background-color 0.3s ease;
-}
+    .section h2 {
+        font-size: 1.5em;
+    }
 
-.skills-section ul li:hover {
-    background-color: #007bff;
-}
+    .testimonial {
+        padding: 15px;
+    }
 
-.experience-item,
-.education-item {
-    background-color: #1e1e1e;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    transition: background-color 0.3s ease;
-}
-
-.experience-item:hover,
-.education-item:hover {
-    background-color: #007bff;
-}
-
-.experience-item h3,
-.education-item h3 {
-    font-size: 20px;
-    margin: 0;
-}
-
-.experience-item p,
-.education-item p {
-    font-size: 16px;
-    color: #aaaaaa;
-    margin: 10px 0 0;
+    .testimonial-image {
+        top: 15px;
+        left: 15px;
+    }
 }
