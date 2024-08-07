@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
 import profilePic from "../asset/profilePic.png"; // Update with the correct path to your profile picture
+import { NavLink } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -15,18 +16,12 @@ const Home = () => {
             <h1>Yash Jain</h1>
             <p>Aspiring Solution Architect | Developer Analyst</p>
             <div className="hero-buttons">
-              <a
-                href="/my-portfolio/resume"
-                className="btn"
-              >
+              <NavLink to="/resume" className="btn">
                 Resume
-              </a>
-              <a
-                href="/my-portfolio/contact"
-                className="btn"
-              >
+              </NavLink>
+              <NavLink to="/contact" className="btn">
                 Contact
-              </a>
+              </NavLink>
             </div>
           </div>
         </div>
@@ -93,7 +88,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className="section contact-info">
+      {/* <section className="section contact-info">
         <h2>Contact Information</h2>
         <p>
           <FontAwesomeIcon icon={faEnvelope} /> yash.jain@example.com
@@ -112,7 +107,7 @@ const Home = () => {
             <FontAwesomeIcon icon={faGithub} />
           </a>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };

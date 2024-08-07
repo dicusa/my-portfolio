@@ -43,23 +43,26 @@ const contacts = [
 const Contact = () => {
   return (
     <div className="contact-container">
-      <div className="background-image"></div>
-      <h1>Contact Me</h1>
-      <p>Reach me out via.</p>
-      <div className="contact-cards">
-        {contacts.map((contact, index) => (
-          <div key={index} className="contact-card">
-            <div className="icon-container">
-              <FontAwesomeIcon icon={contact.icon} size="2x" />
+      <header className="header">
+        <h1>Contact Me</h1>
+      </header>
+      <section id="github" className="section">
+        <p>Reach me out via.</p>
+        <div className="contact-cards">
+          {contacts.map((contact, index) => (
+            <div key={index} className="contact-card">
+              <div className="icon-container">
+                <FontAwesomeIcon icon={contact.icon} size="2x" />
+              </div>
+              <h2>{contact.title}</h2>
+              <p>{contact.description}</p>
+              <a href={contact.link} className="cta-button">
+                {contact.buttonText}
+              </a>
             </div>
-            <h2>{contact.title}</h2>
-            <p>{contact.description}</p>
-            <a href={contact.link} className="cta-button">
-              {contact.buttonText}
-            </a>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 };

@@ -18,14 +18,14 @@ const Resume = () => {
       institution: "Accenture",
       title: "Developer Analyst",
       description:
-        "Working on a Fashion brand ecommerce project to develop enhancements and maintain the backend of the application.",
+        "Working on a Fashion brand ecommerce project to develop and maintain the backend of the application.",
     },
     {
-      year: "2021 - 2022",
+      year: "2021 - 2023",
       institution: "Tata Consultancy Services",
       title: "SAP Hybris Developer",
       description:
-        "Worked to develop and support a B2B Healthcare website backend system. Participated in a significant version upgrade from v2005 to v2211 of the Hybris platform. Implemented login functionality from scratch. Developed Java/Spring-based software that extends the Hybris platform to provide web/mobile applications and integrations with other systems.",
+        "Worked to develop and support a B2B Healthcare website backend system. Lead significant version upgrade from v2005 to v2211 of the Hybris platform. Implemented login functionality from scratch. Developed Java/Spring-based software that extends the Hybris platform to provide web/mobile applications and integrations with other systems.",
     },
     {
       year: "2020 - 2021",
@@ -42,60 +42,58 @@ const Resume = () => {
         "Completed Google Foobar Challenge up to Level 3, demonstrating problem-solving skills and coding proficiency.",
     },
   ];
+  const designSkills = [
+    { skill: "Spring Boot", percentage: 60 },
+    { skill: "React Native", percentage: 75 },
+    { skill: "React JS", percentage: 60 },
+    { skill: "Node + Express JS", percentage: 50 },
+    {
+      skill: "Experience in Agile /Scrum-based,software-based methodology",
+      percentage: 80,
+    },
+  ];
+
+  const codingSkills = [
+    { skill: "Python", percentage: 90 },
+    { skill: "JAVA", percentage: 75 },
+    { skill: "JavaScript", percentage: 85 },
+    { skill: "SQL", percentage: 70 },
+    { skill: "HTML / CSS", percentage: 80 },
+  ];
 
   return (
     <div className="resume-container">
       <header className="resume-header">
         <h1>Resume</h1>
-        <span>8 Years of Experience</span>
+        <span>3 Years of Experience</span>
       </header>
       <div className="resume-timeline">
-        <div className="timeline-section">
-          <h2 className="section-title">Education</h2>
-          {educationData.map((item, index) => (
-            <TimelineItem key={index} {...item} />
-          ))}
-        </div>
         <div className="timeline-section">
           <h2 className="section-title">Experience</h2>
           {experienceData.map((item, index) => (
             <TimelineItem key={index} {...item} />
           ))}
         </div>
-      </div>
-      <section className="certificates">
-        <h2>Certificates</h2>
-        <div className="certificates-grid">
-          <div className="certificate-item">
-            <h4>Psychology of Internation Design</h4>
-            <p>Membership ID: XXXX</p>
-            <p>19 April 2018</p>
-          </div>
-          <div className="certificate-item">
-            <h4>Psychology of Internation Design</h4>
-            <p>Membership ID: XXXX</p>
-            <p>19 April 2018</p>
-          </div>
+        <div className="timeline-section">
+          <h2 className="section-title">Education</h2>
+          {educationData.map((item, index) => (
+            <TimelineItem key={index} {...item} />
+          ))}
         </div>
-      </section>
-      <section className="skills">
-        <h2>Skills</h2>
-        <div className="skills-grid">
-          <div className="skill-item">
-            <h4>Design Skills</h4>
-            <ul>
-              <li>UI/UX Design</li>
-              <li>Print Design</li>
-              <li>Graphic Design</li>
-            </ul>
+      </div>
+      <section className="skills-section">
+        <div className="skills-chart">
+          <div className="skills-column">
+            <h2 className="section-title">FrameWork / Process</h2>
+            {designSkills.map((skill, index) => (
+              <SkillBar key={index} {...skill} />
+            ))}
           </div>
-          <div className="skill-item">
-            <h4>Coding Skills</h4>
-            <ul>
-              <li>HTML / CSS</li>
-              <li>PHP</li>
-              <li>JavaScript</li>
-            </ul>
+          <div className="skills-column">
+            <h2 className="section-title">Coding Language</h2>
+            {codingSkills.map((skill, index) => (
+              <SkillBar key={index} {...skill} />
+            ))}
           </div>
         </div>
       </section>
@@ -111,6 +109,18 @@ const TimelineItem = ({ year, institution, title, description }) => (
     </div>
     <h3 className="title">{title}</h3>
     <p className="description">{description}</p>
+  </div>
+);
+
+const SkillBar = ({ skill, percentage }) => (
+  <div className="skill-bar">
+    <div className="skill-info">
+      <span className="skill-name">{skill}</span>
+      <span className="skill-percentage">{percentage}%</span>
+    </div>
+    <div className="skill-progress">
+      <div className="progress-bar" style={{ width: `${percentage}%` }}></div>
+    </div>
   </div>
 );
 
