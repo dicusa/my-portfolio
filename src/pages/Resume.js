@@ -88,8 +88,6 @@ const Resume = () => {
           {educationData.map((item, index) => (
             <TimelineItem key={index} {...item} />
           ))}
-        </div>
-        <div className="timeline-section">
           <h2 className="section-title">Certification</h2>
           {certificationData.map((item, index) => (
             <TimelineItem key={index} {...item} />
