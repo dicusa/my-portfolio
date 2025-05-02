@@ -12,6 +12,15 @@ const Resume = () => {
     },
   ];
 
+  const certificationData = [
+    {
+      year: "2024 - 2025",
+      institution: "SAP",
+      title: "SAP Certified Professional - Developer - SAP Commerce Cloud",
+      description: "Validated advanced technical skills and expertise to design, develop, and implement solutions using SAP Commerce Cloud Suite in complex enterprise environments",
+    },
+  ];
+
   const experienceData = [
     {
       year: "2023 - Current",
@@ -65,7 +74,7 @@ const Resume = () => {
     <div className="resume-container">
       <header className="resume-header">
         <h1>Resume</h1>
-        <span>3 Years of Experience</span>
+        <span>3+ Years of Experience</span>
       </header>
       <div className="resume-timeline">
         <div className="timeline-section">
@@ -77,6 +86,12 @@ const Resume = () => {
         <div className="timeline-section">
           <h2 className="section-title">Education</h2>
           {educationData.map((item, index) => (
+            <TimelineItem key={index} {...item} />
+          ))}
+        </div>
+        <div className="timeline-section">
+          <h2 className="section-title">Certification</h2>
+          {certificationData.map((item, index) => (
             <TimelineItem key={index} {...item} />
           ))}
         </div>

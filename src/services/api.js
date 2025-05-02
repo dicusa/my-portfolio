@@ -1,3 +1,5 @@
+import sortRepoDataByCreatedDate from "../util/RepoDataOperationUtil";
+
 // src/services/api.js
 const MEDIUM_FEED_URL =
   "https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@jain.yash1909";
@@ -5,13 +7,15 @@ const MEDIUM_FEED_URL =
 const fetchMediumPosts = async () => {
   const response = await fetch(MEDIUM_FEED_URL);
   const data = await response.json();
-  const posts = data.items.map((item) => {
+  const items = sortMediumDataByPubDate(data);
+  const posts = items.map((item) => {
     const imgMatch = item.description.match(/<img[^>]+src="([^">]+)"/);
     const thumbnail = imgMatch ? imgMatch[1] : "";
     return {
       title: item["title"],
       link: item["link"],
       thumbnail,
+      pubDate:item['pubDate']
     };
   });
   return posts;
@@ -91,7 +95,8 @@ const fetchGitHubRepos = async (page = 1, perPage = 4) => {
     `https://api.github.com/users/dicusa/repos?per_page=4&page=${page}`
   );
   const data = await response.json();
-  return data;
+  return sortRepoDataByCreatedDate(data);
+  ;
 };
 
 export { fetchMediumPosts, fetchGitHubRepos };
