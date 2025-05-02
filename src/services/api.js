@@ -1,4 +1,4 @@
-import sortRepoDataByCreatedDate from "../util/RepoDataOperationUtil";
+import { sortMediumDataByPubDate, sortRepoDataByCreatedDate } from "../util/DataOperationUtil";
 
 // src/services/api.js
 const MEDIUM_FEED_URL =
