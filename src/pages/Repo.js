@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import "../component/Home.css";
 import { fetchGitHubRepos } from "../services/api";
+import ShimmerLoader from "../component/ShimmerLoader";
 
 const Repo = () => {
   const [githubRepos, setGitHubRepos] = useState([]);
@@ -10,6 +11,7 @@ const Repo = () => {
   const [loadMoreVisible, setLoadMoreVisible] = useState(true);
   const [selectedLanguage, setSelectedLanguage] = useState("All");
   const [languages, setLanguages] = useState(["All"]);
+  const [loading, setLoading] = useState(true);
 
   const updateLanguages = (repos) => {
     const newLanguages = new Set(
@@ -23,21 +25,32 @@ const Repo = () => {
 
   useEffect(() => {
     const loadGitHubRepos = async () => {
-      const repos = await fetchGitHubRepos(currentPage);
-      setGitHubRepos(repos);
-      updateLanguages(repos);
+      setLoading(true);
+      try {
+        const repos = await fetchGitHubRepos(currentPage);
+        setGitHubRepos(repos);
+        updateLanguages(repos);
+      } catch (error) {
+        console.error("Error loading repos:", error);
+      } finally {
+        setLoading(false);
+      }
     };
 
     loadGitHubRepos();
   }, []);
 
   const loadMoreGitHubRepos = async () => {
-    const repos = await fetchGitHubRepos(currentPage + 1);
-    if (repos != null) {
-      setCurrentPage((prev) => prev + 1);
-      setGitHubRepos((prev) => [...prev, ...repos]);
-      updateLanguages(repos);
-      if (repos.length < 4) setLoadMoreVisible(false);
+    try {
+      const repos = await fetchGitHubRepos(currentPage + 1);
+      if (repos != null) {
+        setCurrentPage((prev) => prev + 1);
+        setGitHubRepos((prev) => [...prev, ...repos]);
+        updateLanguages(repos);
+        if (repos.length < 4) setLoadMoreVisible(false);
+      }
+    } catch (error) {
+      console.error("Error loading more repos:", error);
     }
   };
 
@@ -68,32 +81,36 @@ const Repo = () => {
         </div>
 
         <section id="github" className="section github-repos">
-          <div className="repo-list">
-            {filteredRepos.map((repo, index) => (
-              <div key={index} className="repo-card">
-                <a
-                  href={repo.html_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <div className="repo-content">
-                    <FontAwesomeIcon
-                      icon={faGithub}
-                      size="3x"
-                      className="repo-icon"
-                    />
-                    <h3 className="repo-title">{repo.name}</h3>
-                    <p className="repo-description">{repo.description}</p>
-                    <p className="repo-language">{repo.language}</p>
-                  </div>
-                </a>
-              </div>
-            ))}
-          </div>
+          {loading ? (
+            <ShimmerLoader count={4} type="card" />
+          ) : (
+            <div className="repo-list">
+              {filteredRepos.map((repo, index) => (
+                <div key={index} className="repo-card">
+                  <a
+                    href={repo.html_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <div className="repo-content">
+                      <FontAwesomeIcon
+                        icon={faGithub}
+                        size="3x"
+                        className="repo-icon"
+                      />
+                      <h3 className="repo-title">{repo.name}</h3>
+                      <p className="repo-description">{repo.description}</p>
+                      <p className="repo-language">{repo.language}</p>
+                    </div>
+                  </a>
+                </div>
+              ))}
+            </div>
+          )}
         </section>
       </div>
 
-      {loadMoreVisible && (
+      {loadMoreVisible && !loading && (
         <button className="load-more" onClick={loadMoreGitHubRepos}>
           See More Repos
         </button>

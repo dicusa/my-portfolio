@@ -1,80 +1,99 @@
 import React from "react";
 import "../component/Resume.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDownload } from "@fortawesome/free-solid-svg-icons";
 
 const Resume = () => {
   const educationData = [
     {
-      year: "2017 - 2021",
+      year: "Aug 2017 - Sep 2021",
       institution: "Global Institute of Technology",
-      title: "Bachelor of Technology: Computer Science and Engineering",
-      description:
-        "Completed B.Tech in Computer Science and Engineering with an average percentage of 80%.",
+      title: "B.Tech. in Computer Science and Engineering",
+      description: "GPA: 8.0/10",
     },
   ];
 
   const certificationData = [
     {
-      year: "2024 - 2025",
+      year: "Nov 2024",
       institution: "SAP",
-      title: "SAP Certified Professional - Developer - SAP Commerce Cloud",
+      title: "SAP Certified Professional - Developer (SAP Commerce Cloud)",
       description: "Validated advanced technical skills and expertise to design, develop, and implement solutions using SAP Commerce Cloud Suite in complex enterprise environments",
     },
   ];
 
   const experienceData = [
     {
-      year: "2023 - Current",
+      year: "Dec 2023 - Present",
       institution: "Accenture",
       title: "Developer Analyst",
       description:
-        "Working on a Fashion brand ecommerce project to develop and maintain the backend of the application.",
+        "• Migrated a monolithic B2B platform to a headless microservices architecture using Spring Boot and Java, improving scalability by 40%.\n• Reduced API latency on a high-traffic B2C site by optimizing PostgreSQL queries and implementing caching strategies, improving response time by 35%.\n• Built robust multi-region data migration pipelines using Docker and AWS S3, reducing manual workload by 85%.\n• Enhanced order processing workflows through asynchronous RESTful APIs, reducing transaction failures by 25%.\n• Mentored 2 junior developers and improved system stability through continuous code reviews, refactoring, and adherence to agile practices.\n• Participated in architecture discussions, led sprint planning, and collaborated with global teams to roll out features impacting 1M+ B2C users.",
     },
     {
-      year: "2021 - 2023",
+      year: "Jul 2021 - Nov 2023",
       institution: "Tata Consultancy Services",
-      title: "SAP Hybris Developer",
+      title: "SAP Commerce Cloud Engineer",
       description:
-        "Worked to develop and support a B2B Healthcare website backend system. Lead significant version upgrade from v2005 to v2211 of the Hybris platform. Implemented login functionality from scratch. Developed Java/Spring-based software that extends the Hybris platform to provide web/mobile applications and integrations with other systems.",
-    },
-    {
-      year: "2020 - 2021",
-      institution: "Inventcolabs Pvt. Ltd",
-      title: "React Native Developer Intern",
-      description:
-        "Developed a queuing mechanism application to improve customer services and save customer time. Involved with all phases of mobile app development from initial concepts, through design, development, testing, and deployment. Successfully embedded Google Maps for locating nearby services.",
-    },
-    {
-      year: "2020",
-      institution: "Google",
-      title: "Google Foobar Challenge Participant",
-      description:
-        "Completed Google Foobar Challenge up to Level 3, demonstrating problem-solving skills and coding proficiency.",
-    },
-  ];
-  const designSkills = [
-    { skill: "Spring Boot", percentage: 60 },
-    { skill: "React Native", percentage: 75 },
-    { skill: "React JS", percentage: 60 },
-    { skill: "Node + Express JS", percentage: 50 },
-    {
-      skill: "Experience in Agile /Scrum-based,software-based methodology",
-      percentage: 80,
+        "• Led SAP Hybris upgrade from v2005 to v2211, managing deployment across QA and production environments to ensure system compatibility.\n• Designed and implemented authentication and session management using Spring Security, improving login throughput by 30%.\n• Integrated third-party payment gateways using secure REST APIs, ensuring seamless checkout experience for users.\n• Refactored legacy modules to modular components in SAP Hybris, improving maintainability and onboarding speed.",
     },
   ];
 
-  const codingSkills = [
-    { skill: "Python", percentage: 90 },
-    { skill: "JAVA", percentage: 75 },
-    { skill: "JavaScript", percentage: 85 },
-    { skill: "SQL", percentage: 70 },
-    { skill: "HTML / CSS", percentage: 80 },
+  const projectsData = [
+    {
+      year: "2023",
+      institution: "Personal Project",
+      title: "Scalable E-commerce Platform",
+      description: "Built a production-grade full-stack platform with product, cart, order, and admin modules using Spring Boot and React. Implemented asynchronous messaging across services with Kafka, improving modularity and fault tolerance. Packaged services into Docker containers and managed them with Docker Compose.",
+    },
+    {
+      year: "2022",
+      institution: "Personal Project",
+      title: "AI Voice Assistant",
+      description: "Developed an AI bot using Python and Google Speech Recognition to convert voice input into actionable commands. Built a frontend in React and integrated it with Flask backend using RESTful APIs.",
+    },
   ];
+
+  const designSkills = [
+    { skill: "Spring Boot", percentage: 85 },
+    { skill: "React", percentage: 80 },
+    { skill: "Node.js", percentage: 70 },
+    { skill: "FastAPI/Flask", percentage: 75 },
+    { skill: "SAP Hybris", percentage: 90 },
+    { skill: "Docker & Containerization", percentage: 80 },
+    { skill: "Microservices Architecture", percentage: 85 },
+    { skill: "Agile/Scrum Methodology", percentage: 90 },
+  ];
+
+  const codingSkills = [
+    { skill: "Java", percentage: 90 },
+    { skill: "Python", percentage: 85 },
+    { skill: "JavaScript", percentage: 85 },
+    { skill: "SQL", percentage: 80 },
+    { skill: "HTML/CSS", percentage: 75 },
+    { skill: "Bash", percentage: 70 },
+  ];
+
+  const handleDownloadResume = () => {
+    const link = document.createElement('a');
+    link.href = '/my-portfolio/Yash_Jain_Resume.pdf';
+    link.download = 'Yash_Jain_Resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <div className="resume-container">
       <header className="resume-header">
         <h1>Resume</h1>
-        <span>3+ Years of Experience</span>
+        <span>4+ Years of Experience</span>
+        <button 
+          className="download-resume-btn" 
+          onClick={handleDownloadResume}
+        >
+          <FontAwesomeIcon icon={faDownload} /> Download PDF Resume
+        </button>
       </header>
       <div className="resume-timeline">
         <div className="timeline-section">
@@ -84,6 +103,10 @@ const Resume = () => {
           ))}
         </div>
         <div className="timeline-section">
+          <h2 className="section-title">Projects</h2>
+          {projectsData.map((item, index) => (
+            <TimelineItem key={index} {...item} />
+          ))}
           <h2 className="section-title">Education</h2>
           {educationData.map((item, index) => (
             <TimelineItem key={index} {...item} />
@@ -97,13 +120,13 @@ const Resume = () => {
       <section className="skills-section">
         <div className="skills-chart">
           <div className="skills-column">
-            <h2 className="section-title">FrameWork / Process</h2>
+            <h2 className="section-title">Frameworks & Tools</h2>
             {designSkills.map((skill, index) => (
               <SkillBar key={index} {...skill} />
             ))}
           </div>
           <div className="skills-column">
-            <h2 className="section-title">Coding Language</h2>
+            <h2 className="section-title">Programming Languages</h2>
             {codingSkills.map((skill, index) => (
               <SkillBar key={index} {...skill} />
             ))}
@@ -121,7 +144,7 @@ const TimelineItem = ({ year, institution, title, description }) => (
       <div className="institution">{institution}</div>
     </div>
     <h3 className="title">{title}</h3>
-    <p className="description">{description}</p>
+    <p className="description" style={{ whiteSpace: 'pre-line' }}>{description}</p>
   </div>
 );
 
